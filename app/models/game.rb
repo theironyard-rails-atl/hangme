@@ -31,6 +31,19 @@ class Game < ActiveRecord::Base
     result
   end
 
+  def guess(letter)
+    letter.downcase!
+    found = self.answer.include?(letter)
+
+    unless self.guessed.include?(letter)
+      self.guessed += letter
+      self.misses += 1 unless found
+    end
+    self.save!
+
+    found
+  end
+
   def guessed_string_is_not_nil
     if guessed.nil?
       self.errors.add :guessed, "Guessed cannot be nil"

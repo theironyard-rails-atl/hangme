@@ -1,0 +1,9 @@
+%pre= @game.board
+
+%h3 Status
+%p
+  = "#{@game.misses} / #{@game.max_misses} misses"
+
+%h3 Guessed
+%p
+  = @game.guessed
