@@ -1,6 +1,6 @@
 %h1 Hangman Games
 
-%table
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %th ID
@@ -9,6 +9,8 @@
   %tbody
     - @games.each do |game|
       %tr
-        %td= game.id
+        %td= link_to game.id, game
         %td= game.board
         %td= "#{game.misses} / #{game.max_misses}"
+
+= button_to "New Game", games_path, method: :post
