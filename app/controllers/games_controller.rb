@@ -24,7 +24,7 @@ class GamesController < ApplicationController
 
   def update
     game = Game.find params[:id]
-    game.guess params[:guess]
+    game.guess params[:letter]
     redirect_to game
   end
 end
