@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   # get   '/games/:id/edit' => 'games#edit'
   # delete '/games/:id'     => 'games#destroy'
   # w/ slightly different URL helpers
+
+  get  '/'            => 'users#select'
+  post '/change_user' => 'users#change'
 end

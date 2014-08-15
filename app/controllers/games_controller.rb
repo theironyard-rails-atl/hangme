@@ -1,19 +1,21 @@
 # Note the plural
 class GamesController < ApplicationController
   def index # display a _collection_ of games
-    @games = Game.all
+    # Equivalent:
+    #   @games = Game.where(user_id: user.id)
+    @games = current_user.games
   end
 
   def show
     id = params[:id]
-    @game = Game.find(id)
+    @game = current_user.games.find(id)
   end
 
   def create
     random_word = File.read(__FILE__).
       split(" ").reject{ |word| word.length < 5 }.sample
 
-    game = Game.create!(
+    game = current_user.games.create!(
       max_misses: 10,
       misses:     0,
       answer:     random_word,
@@ -23,7 +25,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    game = Game.find params[:id]
+    game = current_user.games.find params[:id]
     game.guess params[:letter]
     redirect_to game
   end
